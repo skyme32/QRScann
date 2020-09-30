@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">QRScann</string>
+    <string name="content_description_one">description_menu</string>
+    <string name="aboutInfo">About</string>
+    <string name="setting">Settings</string>
+
+
+
+    <string name="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam nibh leo, vehicula ut auctor nec, ultrices in mauris. Quisque nisl magna, efficitur vitae odio sed, pretium gravida lacus. Nunc hendrerit, libero eget commodo accumsan, est leo lobortis neque, in consectetur libero eros vitae odio. Fusce enim mauris, auctor non tortor et, euismod ullamcorper libero. Praesent sem nulla, ornare id arcu dapibus, imperdiet tristique arcu. Etiam id consectetur turpis. Donec ornare dolor eros, vitae ultricies lorem sodales ac. Nam et malesuada tellus, sit amet tincidunt libero. Proin turpis velit, ornare sit amet turpis eget, scelerisque imperdiet ante. Aliquam dolor justo, varius at velit sed, accumsan commodo mi. Nullam faucibus sem nec accumsan placerat.
+
+Cras iaculis tortor lacus. In a lacus imperdiet, tristique odio sit amet, sagittis nisi. Curabitur tempor lectus id massa ullamcorper, at auctor libero blandit. Integer finibus accumsan tempor. Quisque sodales ut mauris id volutpat. Maecenas feugiat faucibus lacus in malesuada. Donec nisi ligula, convallis eget dui eu, suscipit condimentum mi. Vivamus vel imperdiet odio, consequat tristique lectus. Praesent id libero vitae lacus accumsan blandit sit amet quis metus. Morbi euismod lorem ac justo porttitor elementum.
+
+Morbi accumsan aliquam velit, ut posuere tortor tristique et. Quisque eu varius eros. Maecenas sit amet varius lacus. Curabitur in leo ac lacus tristique tempus. Nullam fermentum purus eu est ultrices tempus. Sed vel mollis sem, et feugiat odio. In dapibus nec magna non efficitur. Vivamus pharetra viverra ligula, blandit facilisis felis elementum quis. Praesent facilisis nulla ut lorem venenatis, eget pretium ligula lacinia. Suspendisse potenti. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin nulla massa, posuere gravida faucibus in, ultrices vitae purus. Suspendisse dapibus pulvinar ex, sit amet vulputate ante commodo nec. Proin placerat sagittis nisi sed tristique. Nunc tincidunt sapien sit amet arcu tincidunt commodo.
+
+In consequat tempus dui id consectetur. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum id sodales lectus. Sed nunc ligula, malesuada non sapien et, semper finibus ipsum. Aenean sit amet fermentum libero, quis ultricies purus. Nam vel molestie ipsum. Aenean vitae consectetur turpis. Duis egestas ante non egestas semper. In sed lorem congue, sollicitudin tortor tempus, luctus ligula. Sed et luctus neque, et interdum quam. Quisque est nisl, cursus mattis purus id, consequat accumsan est. Ut a facilisis ex, ac molestie dolor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus pulvinar venenatis luctus. Nullam at enim tempor, vestibulum nibh at, rutrum mi.
+
+Donec posuere velit aliquet, rhoncus lacus malesuada, vehicula lacus. Integer vitae efficitur elit. Sed metus dolor, fringilla faucibus tincidunt quis, placerat at ipsum. Nam maximus nisi ac lectus vehicula lobortis. Phasellus orci ipsum, aliquet in lectus ac, molestie fermentum ante. Phasellus lobortis metus ut nisl maximus mollis. Cras et ullamcorper velit.</string>
+
 </resources>
