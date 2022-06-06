@@ -1,9 +1,11 @@
 package com.skyme32.qrscann.ui
 
+import android.graphics.fonts.FontStyle
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -12,6 +14,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle.Companion.Italic
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
 
@@ -27,6 +31,14 @@ fun RowImage(resource: Int, description: String) {
 }
 
 @Composable
-fun RowText(text: String, color: Color, style: TextStyle, lines: Int = Int.MAX_VALUE) {
-    Text(text = text, color = color, style = style, maxLines = lines)
+fun RowText(text: String) {
+    SelectionContainer {
+        Text(
+            text = text,
+            color = MaterialTheme.colors.onBackground,
+            style = MaterialTheme.typography.subtitle1,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
+        )
+    }
 }
