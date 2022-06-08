@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">QRScann</string>
+    <string name="title_scann">Escanear QR</string>
+    <string name="title_detail">QR Información</string>
+    <string name="arrow_back">Volver atras</string>
+</resources>
