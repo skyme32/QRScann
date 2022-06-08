@@ -11,6 +11,7 @@ import com.skyme32.qrscann.navigation.AppNavigation
 import com.skyme32.qrscann.ui.theme.QRScannTheme
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
