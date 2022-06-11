@@ -80,4 +80,19 @@ dependencies {
     //Camera Permission
     implementation "com.google.accompanist:accompanist-permissions:0.19.0"
 
+    // Room
+    implementation "androidx.room:room-runtime:2.4.2"
+    annotationProcessor "androidx.room:room-compiler:2.4.2"
+
+    // Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:2.4.2"
+
+    // Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+
+    // Compose dependencies
+    implementation "androidx.compose.material:material-icons-extended:$compose_version"
+
+
 }

@@ -26,7 +26,7 @@ import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
-import com.skyme32.qrscann.component.ScanCard
+import com.skyme32.qrscann.ui.component.ScanCard
 import java.util.concurrent.Executors
 
 

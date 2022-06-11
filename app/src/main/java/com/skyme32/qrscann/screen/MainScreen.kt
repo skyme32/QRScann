@@ -14,7 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.skyme32.qrscann.R
-import com.skyme32.qrscann.component.RowMainScreen
+import com.skyme32.qrscann.ui.component.RowMainScreen
 import com.skyme32.qrscann.navigation.AppScreens
 
 

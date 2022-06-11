@@ -1,4 +1,4 @@
-package com.skyme32.qrscann.component
+package com.skyme32.qrscann.ui.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row

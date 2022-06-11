@@ -1,4 +1,4 @@
-package com.skyme32.qrscann.component
+package com.skyme32.qrscann.ui.component
 
 import android.content.Context
 import androidx.compose.foundation.*
@@ -21,8 +21,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.skyme32.qrscann.R
-import com.skyme32.qrscann.intent.shareIntent
-import com.skyme32.qrscann.intent.webViewIntent
+import com.skyme32.qrscann.ui.intent.shareIntent
+import com.skyme32.qrscann.ui.intent.webViewIntent
 
 
 @Composable
@@ -75,24 +75,9 @@ fun ScanCard(
                 }
             }
 
-            Row(
-                Modifier
-                    .padding(start = 16.dp, end = 24.dp, top = 16.dp)
-                    .height(90.dp)) {
+            HelpText(barcode)
 
-                // Texto de ayuda
-                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                    SelectionContainer {
-                        Text(
-                            text = barcode?.rawValue.toString(),
-                            style = MaterialTheme.typography.body2,
-                            modifier = Modifier.verticalScroll(rememberScrollState())
-                        )
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
 
@@ -111,12 +96,6 @@ fun ScanCard(
                             }
                         }) {
                             Text(text = "SHOW")
-                        }
-
-                        Spacer(modifier = Modifier.width(8.dp))
-
-                        TextButton(onClick = { /*TODO*/ }) {
-                            Text(text = "SAVE")
                         }
                     }
 
@@ -137,6 +116,26 @@ fun ScanCard(
     }
 }
 
+@Composable
+fun HelpText(barcode: Barcode?) {
+    Row(
+        Modifier
+            .padding(start = 16.dp, end = 0.dp, top = 0.dp)
+        //.height(IntrinsicSize.Min)
+    ) {
+
+        // Texto de ayuda
+        CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+            SelectionContainer(modifier = Modifier.heightIn(0.dp, 120.dp)) {
+                Text(
+                    text = barcode?.rawValue.toString(),
+                    style = MaterialTheme.typography.body2,
+                    modifier = Modifier.verticalScroll(rememberScrollState())
+                )
+            }
+        }
+    }
+}
 
 private fun typeBarcode(barcode: Barcode?): Pair<Boolean, String> {
     var urlText = ""

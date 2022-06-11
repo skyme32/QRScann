@@ -1,4 +1,4 @@
-package com.skyme32.qrscann.component
+package com.skyme32.qrscann.ui.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

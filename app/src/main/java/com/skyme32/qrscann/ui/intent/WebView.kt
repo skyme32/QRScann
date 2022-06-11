@@ -1,4 +1,4 @@
-package com.skyme32.qrscann.intent
+package com.skyme32.qrscann.ui.intent
 
 import android.content.Context
 import android.content.Intent
