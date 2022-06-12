@@ -8,7 +8,11 @@ import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
@@ -27,40 +31,55 @@ import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
 import com.skyme32.qrscann.ui.component.ScanCard
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import java.util.concurrent.Executors
 
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MLKitScan(barcodeView: BarcodeView = viewModel()) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
-    val extractedText: State<Barcode?> = barcodeView.barcode.observeAsState(null)
+    val liveBarcode: State<Barcode?> = barcodeView.barcode.observeAsState(null)
 
-    Column(
-        modifier = Modifier.fillMaxSize()
+    var skipHalfExpanded by remember { mutableStateOf(false) }
+    val state = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Hidden,
+        skipHalfExpanded = skipHalfExpanded
+    )
+    val scope = rememberCoroutineScope()
+
+    ModalBottomSheetLayout(
+        sheetState = state,
+        sheetShape = RoundedCornerShape(16.dp),
+        sheetContent = {
+            ScanCard(
+                barcode = liveBarcode.value,
+                context = context
+            )
+        }
     ) {
         CameraRecognitionView(
             context = context,
             lifecycleOwner = lifecycleOwner,
-            extractedText = extractedText as MutableState<Barcode?>
+            extractedText = liveBarcode as MutableState<Barcode?>,
+            state = state,
+            scope = scope
         )
-        if (extractedText.value != null) {
-            ScanCard(
-                modifier = Modifier.padding(8.dp),
-                barcode = extractedText.value,
-                context = context
-            )
-        }
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @SuppressLint("RestrictedApi")
 @Composable
 fun CameraRecognitionView(
     context: Context,
     lifecycleOwner: LifecycleOwner,
-    extractedText: MutableState<Barcode?>
-) {
+    extractedText: MutableState<Barcode?>,
+    state: ModalBottomSheetState,
+    scope: CoroutineScope,
+    ) {
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
     var preview by remember { mutableStateOf<Preview?>(null) }
     val executor = ContextCompat.getMainExecutor(context)
@@ -74,7 +93,7 @@ fun CameraRecognitionView(
         AndroidView(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.6f),
+                .fillMaxHeight(1f),
             factory = { ctx ->
                 val previewView = PreviewView(ctx)
 
@@ -85,7 +104,7 @@ fun CameraRecognitionView(
                         .apply {
                             setAnalyzer(
                                 cameraExecutor,
-                                ObjectDetectorImageAnalyzer(scanner, extractedText)
+                                ObjectDetectorImageAnalyzer(scanner, extractedText, state, scope)
                             )
                         }
                     val cameraSelector = CameraSelector.Builder()
@@ -113,19 +132,23 @@ class BarcodeView : ViewModel() {
     private var _barcode: MutableLiveData<Barcode?> = MutableLiveData(null)
     val barcode: LiveData<Barcode?> = _barcode
 
-    fun setBarcode(user: Barcode?) {
-        _barcode.value = user
+    fun setBarcode(barcode: Barcode?) {
+        _barcode.value = barcode
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 class ObjectDetectorImageAnalyzer(
     private val scanner: BarcodeScanner,
-    private var extractedText: MutableState<Barcode?>
-) : ImageAnalysis.Analyzer {
+    private var extractedText: MutableState<Barcode?>,
+    private var state: ModalBottomSheetState,
+    private var scope: CoroutineScope
+    ) : ImageAnalysis.Analyzer {
 
     @SuppressLint("UnsafeOptInUsageError")
     override fun analyze(imageProxy: ImageProxy) {
         val mediaImage = imageProxy.image
+
         if (mediaImage != null) {
             val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
 
@@ -136,6 +159,7 @@ class ObjectDetectorImageAnalyzer(
 
                         for (barcode in barcodes.result) {
                             extractedText.value = barcode
+                            scope.launch { state.show() }
                         }
                     }
                     imageProxy.close()

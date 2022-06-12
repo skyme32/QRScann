@@ -1,6 +1,7 @@
 package com.skyme32.qrscann.screen
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
@@ -55,6 +56,7 @@ fun ScanScreen(navController: NavHostController) {
     navTopAppBarScan(navController)
 }
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun navTopAppBarScan(navController: NavHostController) {
     Scaffold(

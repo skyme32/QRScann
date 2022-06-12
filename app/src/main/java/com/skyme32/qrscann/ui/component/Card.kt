@@ -14,21 +14,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.skyme32.qrscann.R
 import com.skyme32.qrscann.ui.intent.shareIntent
 import com.skyme32.qrscann.ui.intent.webViewIntent
+import kotlinx.coroutines.CoroutineScope
 
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ScanCard(
     modifier: Modifier = Modifier,
-    elevation: Dp = 1.dp,
+    elevation: Dp = 0.dp,
     border: BorderStroke? = null,
     background: Color = MaterialTheme.colors.surface,
     contentColor: Color = contentColorFor(background),
@@ -72,7 +73,16 @@ fun ScanCard(
                 Column(Modifier.fillMaxWidth()) {
                     // Encabezado
                     Text(text = urlText, style = MaterialTheme.typography.h6)
+                    CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+                        Text(
+                            text = barcode?.displayValue.toString(),
+                            style = MaterialTheme.typography.subtitle1,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
                 }
+
             }
 
             HelpText(barcode)
@@ -119,14 +129,11 @@ fun ScanCard(
 @Composable
 fun HelpText(barcode: Barcode?) {
     Row(
-        Modifier
-            .padding(start = 16.dp, end = 0.dp, top = 0.dp)
-        //.height(IntrinsicSize.Min)
+        Modifier.padding(start = 16.dp, end = 0.dp, top = 0.dp)
     ) {
 
-        // Texto de ayuda
         CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-            SelectionContainer(modifier = Modifier.heightIn(0.dp, 120.dp)) {
+            SelectionContainer(modifier = Modifier.heightIn(0.dp, 200.dp)) {
                 Text(
                     text = barcode?.rawValue.toString(),
                     style = MaterialTheme.typography.body2,
@@ -147,12 +154,4 @@ private fun typeBarcode(barcode: Barcode?): Pair<Boolean, String> {
     }
 
     return Pair(isUrl, urlText)
-}
-
-
-@Preview
-@Composable
-fun DefaultCard() {
-    val context = LocalContext.current
-    ScanCard(context = context)
 }
