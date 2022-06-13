@@ -41,7 +41,7 @@ fun SplashScreen(navController: NavHostController) {
         startAnimation = true
         delay(2500)
         navController.popBackStack()
-        navController.navigate(AppScreens.MainScreen.route)
+        navController.navigate(AppScreens.ScanScreen.route)
     }
 
     Splash(alphaAnim.value)
@@ -51,7 +51,7 @@ fun SplashScreen(navController: NavHostController) {
 fun Splash(alpha: Float) {
     Column(modifier = Modifier
         .fillMaxSize()
-        .background(MaterialTheme.colors.primaryVariant),
+        .background(MaterialTheme.colors.primary),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

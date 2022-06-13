@@ -1,5 +1,6 @@
 package com.skyme32.qrscann.screen
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,6 +24,7 @@ fun MainScreen(navController: NavHostController) {
     navTopAppBarMain(navController)
 }
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun navTopAppBarMain(navController: NavHostController) {
     Scaffold(
@@ -40,7 +42,7 @@ fun navTopAppBarMain(navController: NavHostController) {
         floatingActionButton = {
             FloatingActionButton(
                 onClick = { navController.navigate(AppScreens.ScanScreen.route) },
-                backgroundColor = MaterialTheme.colors.primaryVariant
+                backgroundColor = MaterialTheme.colors.secondary
             ) {
                 Icon(Icons.Filled.Add, "")
             }
