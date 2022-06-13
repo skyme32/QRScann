@@ -52,7 +52,7 @@ fun MLKitScan(barcodeView: BarcodeView = viewModel()) {
 
     ModalBottomSheetLayout(
         sheetState = state,
-        sheetShape = RoundedCornerShape(16.dp),
+        sheetShape = RoundedCornerShape(16.dp, 16.dp, 0.dp, 0.dp),//RoundedCornerShape(16.dp),
         sheetContent = {
             ScanCard(
                 barcode = liveBarcode.value,

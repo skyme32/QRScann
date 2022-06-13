@@ -1,6 +1,7 @@
 package com.skyme32.qrscann.ui.component
 
 import android.content.Context
+import android.view.ContextThemeWrapper
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -18,14 +19,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.skyme32.qrscann.R
 import com.skyme32.qrscann.ui.intent.shareIntent
 import com.skyme32.qrscann.ui.intent.webViewIntent
-import kotlinx.coroutines.CoroutineScope
+import com.skyme32.qrscann.utils.typeBarcode
+import com.skyme32.qrscann.utils.validateUrl
 
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ScanCard(
     modifier: Modifier = Modifier,
@@ -45,7 +47,7 @@ fun ScanCard(
         border = border,
         modifier = modifier
     ) {
-        val (isUrl, urlText) = typeBarcode(barcode)
+        val (isUrl, urlText, imageId) = typeBarcode(barcode)
 
         Column {
             Row(
@@ -63,7 +65,7 @@ fun ScanCard(
                     contentAlignment = Alignment.Center
                 ) {
                     Image(
-                        painter = painterResource(R.drawable.ic_launcher_foreground),
+                        painter = painterResource(imageId),
                         contentDescription = null
                     )
                 }
@@ -85,9 +87,9 @@ fun ScanCard(
 
             }
 
+            Spacer(modifier = Modifier.height(4.dp))
             HelpText(barcode)
-
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
             CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
 
@@ -102,7 +104,7 @@ fun ScanCard(
 
                         TextButton(onClick = {
                             if (isUrl) {
-                                webViewIntent(context, barcode?.url?.url.toString())
+                                webViewIntent(context, validateUrl(barcode?.url?.url.toString()))
                             }
                         }) {
                             Text(text = "SHOW")
@@ -129,7 +131,7 @@ fun ScanCard(
 @Composable
 fun HelpText(barcode: Barcode?) {
     Row(
-        Modifier.padding(start = 16.dp, end = 0.dp, top = 0.dp)
+        Modifier.padding(start = 16.dp, end = 16.dp, top = 0.dp)
     ) {
 
         CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
@@ -142,16 +144,4 @@ fun HelpText(barcode: Barcode?) {
             }
         }
     }
-}
-
-private fun typeBarcode(barcode: Barcode?): Pair<Boolean, String> {
-    var urlText = ""
-    var isUrl = false
-
-    if (Barcode.TYPE_URL == barcode?.valueType) {
-        urlText = "This is a URL"
-        isUrl = true
-    }
-
-    return Pair(isUrl, urlText)
 }
