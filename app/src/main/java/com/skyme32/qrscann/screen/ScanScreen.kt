@@ -63,6 +63,7 @@ fun navTopAppBarScan(navController: NavHostController) {
         topBar = {
             TopAppBar(
                 title = {
+                    /*
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
                         contentDescription = stringResource(id = R.string.arrow_back),
@@ -70,6 +71,7 @@ fun navTopAppBarScan(navController: NavHostController) {
                             navController.popBackStack()
                         })
                     Spacer(modifier = Modifier.padding(16.dp))
+                     */
                     Text(
                         text = stringResource(id = R.string.title_scann),
                         fontSize = 20.sp,

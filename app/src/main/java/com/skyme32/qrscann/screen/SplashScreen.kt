@@ -4,10 +4,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -41,7 +38,7 @@ fun SplashScreen(navController: NavHostController) {
         startAnimation = true
         delay(2500)
         navController.popBackStack()
-        navController.navigate(AppScreens.ScanScreen.route)
+        navController.navigate(AppScreens.MainScreen.route)
     }
 
     Splash(alphaAnim.value)
@@ -56,10 +53,11 @@ fun Splash(alpha: Float) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_launcher_foreground),
+            painter = painterResource(id = R.drawable.ic_qr_image),
             modifier = Modifier
                 .size(150.dp)
-                .alpha(alpha = alpha),
+                .alpha(alpha = alpha)
+                .padding(16.dp),
             contentDescription = "Logo Icon",
         )
         Text(

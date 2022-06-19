@@ -3,4 +3,16 @@
     <string name="title_detail">QR Information</string>
     <string name="title_scann">Scann QR</string>
     <string name="arrow_back">Back</string>
+
+    <!-- -->
+    <string name="is_url">This is a URL</string>
+    <string name="is_geo">This is a GEOLOCALITATION</string>
+    <string name="is_email">This is a EMAIL</string>
+    <string name="is_sms">This is a SMS</string>
+    <string name="is_calendar">This is a CALENDAR EVENT</string>
+    <string name="is_contact">This is a CONTACT INFO</string>
+    <string name="is_phone">This is a PHONE</string>
+    <string name="is_wifi">"This is a WIFI</string>
+    <string name="is_text">This is a TEXT</string>
+    <string name="is_unassigned">This is a UNASSIGNED</string>
 </resources>

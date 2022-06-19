@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.CropFree
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -44,7 +45,7 @@ fun navTopAppBarMain(navController: NavHostController) {
                 onClick = { navController.navigate(AppScreens.ScanScreen.route) },
                 backgroundColor = MaterialTheme.colors.secondary
             ) {
-                Icon(Icons.Filled.Add, "")
+                Icon(Icons.Filled.CropFree, "")
             }
         }
     ) {

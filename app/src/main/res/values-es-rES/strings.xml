@@ -4,4 +4,16 @@
     <string name="title_scann">Escanear QR</string>
     <string name="title_detail">QR Información</string>
     <string name="arrow_back">Volver atras</string>
+
+    <!-- -->
+    <string name="is_url">Es una URL</string>
+    <string name="is_geo">Es una LOCALIZACIÓN</string>
+    <string name="is_email">Es una CORREO</string>
+    <string name="is_sms">Es un SMS</string>
+    <string name="is_calendar">Es un CALENDARIO</string>
+    <string name="is_contact">Es un CONTACTO</string>
+    <string name="is_phone">Es un TELEFONO</string>
+    <string name="is_wifi">"Es un WIFI</string>
+    <string name="is_text">Es un TEXT</string>
+    <string name="is_unassigned">This is a UNASSIGNED</string>
 </resources>
