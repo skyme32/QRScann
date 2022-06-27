@@ -10,7 +10,9 @@ interface BarcodeDefinition {
 
     fun getIntent(context: Context, barcode: Barcode): Intent
 
-    fun getText(): String
+    fun getText(context: Context): String
 
-    fun getImatge(): Int
+    fun getImages(): Int
+
+    fun isIntent(): Boolean
 }

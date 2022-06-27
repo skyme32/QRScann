@@ -7,10 +7,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.skyme32.qrscann.R
@@ -33,7 +36,14 @@ fun RowMainScreen(
         ) {
             RowImage(resource = R.drawable.ic_launcher_foreground, description = "MyImage")
             Spacer(modifier = modifier.padding(1.dp))
-            RowText(text = "Title Hello Compose")
+            RowText(
+                text = "Title Hello Compose",
+                color = MaterialTheme.colors.onBackground,
+                style = MaterialTheme.typography.subtitle1,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+
+            )
         }
     }
 }

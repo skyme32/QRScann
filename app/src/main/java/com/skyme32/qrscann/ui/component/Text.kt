@@ -5,12 +5,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
@@ -27,14 +30,23 @@ fun RowImage(resource: Int, description: String) {
 }
 
 @Composable
-fun RowText(text: String) {
+fun RowText(
+    text: String,
+    color: Color,
+    style: TextStyle,
+    maxLines: Int,
+    overflow: TextOverflow
+) {
     SelectionContainer {
         Text(
             text = text,
-            color = MaterialTheme.colors.onBackground,
-            style = MaterialTheme.typography.subtitle1,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis
+            color = color,
+            style = style,
+            maxLines = maxLines,
+            overflow = overflow
         )
     }
 }
+
+
+

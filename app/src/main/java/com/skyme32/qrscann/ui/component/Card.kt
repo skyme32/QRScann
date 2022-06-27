@@ -1,7 +1,7 @@
 package com.skyme32.qrscann.ui.component
 
 import android.content.Context
-import android.view.ContextThemeWrapper
+import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -19,13 +19,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.skyme32.qrscann.R
+import com.skyme32.qrscann.strategy.BarcodeResolver
 import com.skyme32.qrscann.ui.intent.shareIntent
-import com.skyme32.qrscann.ui.intent.webViewIntent
-import com.skyme32.qrscann.utils.typeBarcode
-import com.skyme32.qrscann.utils.validateUrl
 
 
 @Composable
@@ -47,7 +44,8 @@ fun ScanCard(
         border = border,
         modifier = modifier
     ) {
-        val (isUrl, urlText, imageId) = typeBarcode(barcode)
+        val barcodeResolver = BarcodeResolver()
+        val barcodeDefinition = barcodeResolver.getBy(barcode?.valueType)
 
         Column {
             Row(
@@ -65,7 +63,7 @@ fun ScanCard(
                     contentAlignment = Alignment.Center
                 ) {
                     Image(
-                        painter = painterResource(imageId),
+                        painter = painterResource(barcodeDefinition!!.getImages()),
                         contentDescription = null
                     )
                 }
@@ -74,10 +72,11 @@ fun ScanCard(
 
                 Column(Modifier.fillMaxWidth()) {
                     // Encabezado
-                    Text(text = urlText, style = MaterialTheme.typography.h6)
+                    Text(text = barcodeDefinition!!.getText(context), style = MaterialTheme.typography.h6)
                     CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                        Text(
+                        RowText(
                             text = barcode?.displayValue.toString(),
+                            color = Color.LightGray,
                             style = MaterialTheme.typography.subtitle1,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
@@ -101,13 +100,22 @@ fun ScanCard(
 
                     // Botones
                     Row(modifier = Modifier.align(Alignment.CenterStart)) {
+                        if (barcodeDefinition!!.isIntent()) {
+                            TextButton(onClick = {
+                                try {
+                                    context.startActivity(
+                                        barcodeDefinition.getIntent(
+                                            context,
+                                            barcode!!
+                                        )
+                                    )
+                                } catch (e: Exception) {
+                                    Log.i("Error", "Error")
+                                }
 
-                        TextButton(onClick = {
-                            if (isUrl) {
-                                webViewIntent(context, validateUrl(barcode?.url?.url.toString()))
+                            }) {
+                                Text(text = "SHOW")
                             }
-                        }) {
-                            Text(text = "SHOW")
                         }
                     }
 
