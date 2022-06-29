@@ -110,7 +110,7 @@ fun ScanCard(
                                         )
                                     )
                                 } catch (e: Exception) {
-                                    Log.i("Error", "Error")
+                                    Log.i("Error", e.printStackTrace().toString())
                                 }
 
                             }) {

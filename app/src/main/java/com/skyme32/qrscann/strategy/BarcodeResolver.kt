@@ -15,7 +15,8 @@ class BarcodeResolver {
         TypeUrl,
         TypeUnknown,
         TypeText,
-        TypeWifi
+        TypeWifi,
+        TypeSms
     )
 
     private var mapBarcodeType: Map<Int, BarcodeDefinition> = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
