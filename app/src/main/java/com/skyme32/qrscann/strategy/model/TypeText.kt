@@ -1,10 +1,10 @@
 package com.skyme32.qrscann.strategy.model
 
-import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.widget.Toast
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.skyme32.qrscann.R
 import com.skyme32.qrscann.strategy.BarcodeDefinition
@@ -22,6 +22,8 @@ object TypeText: BarcodeDefinition {
         val clip: ClipData = ClipData.newPlainText("simple text", barcode.displayValue)
         clipboard.setPrimaryClip(clip)
 
+        Toast.makeText(context, "Copied text", Toast.LENGTH_SHORT).show()
+
         return Intent(context, null)
     }
 
@@ -37,5 +39,7 @@ object TypeText: BarcodeDefinition {
         return true
     }
 
-
+    override fun getTextButton(context: Context): String {
+        return context.getString(R.string.button_text)
+    }
 }

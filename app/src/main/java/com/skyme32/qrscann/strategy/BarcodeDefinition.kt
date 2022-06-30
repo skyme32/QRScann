@@ -15,4 +15,6 @@ interface BarcodeDefinition {
     fun getImages(): Int
 
     fun isIntent(): Boolean
+
+    fun getTextButton(context: Context): String
 }

@@ -76,7 +76,7 @@ fun ScanCard(
                     CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                         RowText(
                             text = barcode?.displayValue.toString(),
-                            color = Color.LightGray,
+                            color = Color.Gray,
                             style = MaterialTheme.typography.subtitle1,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
@@ -114,7 +114,7 @@ fun ScanCard(
                                 }
 
                             }) {
-                                Text(text = "SHOW")
+                                Text(text = barcodeDefinition.getTextButton(context))
                             }
                         }
                     }

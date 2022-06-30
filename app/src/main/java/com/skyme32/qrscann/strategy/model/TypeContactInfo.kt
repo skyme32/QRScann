@@ -32,6 +32,10 @@ object TypeContactInfo : BarcodeDefinition {
         return true
     }
 
+    override fun getTextButton(context: Context): String {
+        return context.getString(R.string.button_contact)
+    }
+
     private fun generateContact(barcode: Barcode): Intent {
         val intent = Intent(ContactsContract.Intents.Insert.ACTION)
         intent.type = ContactsContract.RawContacts.CONTENT_TYPE
@@ -65,5 +69,4 @@ object TypeContactInfo : BarcodeDefinition {
 
         return intent
     }
-
 }

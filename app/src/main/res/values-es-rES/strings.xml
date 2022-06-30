@@ -16,4 +16,15 @@
     <string name="is_wifi">"Es un WIFI</string>
     <string name="is_text">Es un TEXT</string>
     <string name="is_unassigned">This is a UNASSIGNED</string>
+
+    <!-- -->
+    <string name="button_url">VISUALIZAR</string>
+    <string name="button_geo">ABRIR MAPA</string>
+    <string name="button_email">ENVIAR CORREO</string>
+    <string name="button_sms">ENVIAR SMS</string>
+    <string name="button_calendar">AÑADIR EVENTO</string>
+    <string name="button_contact">AÑADIR CONTACTO</string>
+    <string name="button_phone">LLAMAR</string>
+    <string name="button_wifi">AÑADIR WIFI</string>
+    <string name="button_text">COPIAR TEXT</string>
 </resources>

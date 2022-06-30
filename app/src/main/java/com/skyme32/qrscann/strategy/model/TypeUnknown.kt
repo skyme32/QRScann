@@ -28,5 +28,7 @@ object TypeUnknown: BarcodeDefinition {
         return false
     }
 
-
+    override fun getTextButton(context: Context): String {
+        return context.getString(R.string.button_url)
+    }
 }

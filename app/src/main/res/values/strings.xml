@@ -12,7 +12,18 @@
     <string name="is_calendar">This is a CALENDAR EVENT</string>
     <string name="is_contact">This is a CONTACT INFO</string>
     <string name="is_phone">This is a PHONE</string>
-    <string name="is_wifi">"This is a WIFI</string>
+    <string name="is_wifi">This is a WIFI</string>
     <string name="is_text">This is a TEXT</string>
     <string name="is_unassigned">This is a UNASSIGNED</string>
+
+    <!-- -->
+    <string name="button_url">SHOW</string>
+    <string name="button_geo">OPEN MAPS</string>
+    <string name="button_email">SEND EMAIL</string>
+    <string name="button_sms">SEND SMS</string>
+    <string name="button_calendar">ADD EVENT</string>
+    <string name="button_contact">ADD CONTACT</string>
+    <string name="button_phone">CALL</string>
+    <string name="button_wifi">ADD WIFI</string>
+    <string name="button_text">COPY TEXT</string>
 </resources>

@@ -36,5 +36,7 @@ object TypeEmail : BarcodeDefinition {
         return true
     }
 
-
+    override fun getTextButton(context: Context): String {
+        return context.getString(R.string.button_email)
+    }
 }

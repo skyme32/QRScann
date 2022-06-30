@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.skyme32.qrscann.R
-import com.skyme32.qrscann.navigation.AppScreens
 import com.skyme32.qrscann.strategy.BarcodeDefinition
 
 object TypeWifi: BarcodeDefinition {
@@ -29,5 +28,7 @@ object TypeWifi: BarcodeDefinition {
         return false
     }
 
-
+    override fun getTextButton(context: Context): String {
+        return context.getString(R.string.button_wifi)
+    }
 }
