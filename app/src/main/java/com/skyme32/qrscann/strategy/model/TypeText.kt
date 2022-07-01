@@ -22,7 +22,7 @@ object TypeText: BarcodeDefinition {
         val clip: ClipData = ClipData.newPlainText("simple text", barcode.displayValue)
         clipboard.setPrimaryClip(clip)
 
-        Toast.makeText(context, "Copied text", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, context.getString(R.string.text_copied), Toast.LENGTH_SHORT).show()
 
         return Intent(context, null)
     }

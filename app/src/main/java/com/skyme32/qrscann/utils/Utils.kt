@@ -44,7 +44,6 @@ fun contractIntentInsert(index: Int): String {
             ContactsContract.Intents.Insert.TERTIARY_PHONE
         }
     }
-
 }
 
 

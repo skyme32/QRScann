@@ -3,6 +3,7 @@
     <string name="title_detail">QR Information</string>
     <string name="title_scann">Scann QR</string>
     <string name="arrow_back">Back</string>
+    <string name="text_copied">Copied text</string>
 
     <!-- -->
     <string name="is_url">This is a URL</string>

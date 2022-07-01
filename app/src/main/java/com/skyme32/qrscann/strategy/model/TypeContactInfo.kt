@@ -50,6 +50,16 @@ object TypeContactInfo : BarcodeDefinition {
                 .putExtra(ContactsContract.Intents.Insert.PHONE_TYPE, typeContact(phone))
         }
 
+        barcode.contactInfo?.addresses?.forEach { addresses ->
+            addresses.addressLines.forEach { addressLines ->
+                intent.putExtra(ContactsContract.Intents.Insert.POSTAL, addressLines)
+            }
+        }
+
+        barcode.contactInfo?.urls?.forEach { urls ->
+            intent.putExtra(ContactsContract.Intents.Insert.IM_HANDLE, urls)
+        }
+
         intent.putExtra(ContactsContract.Intents.Insert.NAME, barcode.displayValue)
             .putExtra(
                 ContactsContract.Intents.Insert.PHONETIC_NAME,
@@ -63,9 +73,6 @@ object TypeContactInfo : BarcodeDefinition {
                 ContactsContract.Intents.Insert.JOB_TITLE,
                 barcode.contactInfo?.title
             )
-
-        intent.putExtra(ContactsContract.Intents.Insert.POSTAL, barcode.contactInfo?.addresses?.get(0)?.addressLines?.get(0))
-        intent.putExtra(ContactsContract.Intents.Insert.IM_HANDLE, barcode.contactInfo?.urls?.get(0))
 
         return intent
     }
