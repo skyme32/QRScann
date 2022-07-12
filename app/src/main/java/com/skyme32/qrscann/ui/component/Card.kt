@@ -163,7 +163,7 @@ private fun HelpText(barcode: Barcode?) {
         horizontalArrangement = Arrangement.Center,
     ) {
         Image(
-            bitmap = getBitmap(barcode?.rawValue.toString()).asImageBitmap(),
+            bitmap = getBitmap(barcode?.rawValue.toString(), MaterialTheme.colors.primary, MaterialTheme.colors.background).asImageBitmap(),
             contentDescription = "some useful description",
         )
     }
