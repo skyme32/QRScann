@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Share
@@ -129,10 +128,7 @@ private fun actionBottom(
                     TextButton(onClick = {
                         try {
                             context.startActivity(
-                                barcodeDefinition.getIntent(
-                                    context,
-                                    barcode!!
-                                )
+                                barcodeDefinition.getIntent(context, barcode!!)
                             )
                         } catch (e: Exception) {
                             Log.i("Error", e.printStackTrace().toString())
@@ -162,7 +158,8 @@ private fun actionBottom(
 @Composable
 private fun HelpText(barcode: Barcode?) {
 
-    Row(modifier = Modifier.fillMaxWidth(),
+    Row(
+        modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
     ) {
         Image(
