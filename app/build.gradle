@@ -71,6 +71,7 @@ dependencies {
 
     // Barcode model dependencies
     implementation 'com.google.mlkit:barcode-scanning:17.0.2'
+    implementation 'com.google.zxing:core:3.5.0'
 
     // CameraX dependencies
     implementation "androidx.camera:camera-core:${camerax_version}"
@@ -88,8 +89,8 @@ dependencies {
     kapt "androidx.room:room-compiler:2.4.2"
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3'
 
     // Compose dependencies
     implementation "androidx.compose.material:material-icons-extended:$compose_version"

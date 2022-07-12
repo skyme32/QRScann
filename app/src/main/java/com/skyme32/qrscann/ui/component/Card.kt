@@ -15,11 +15,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.mlkit.vision.barcode.common.Barcode
+import com.skyme32.qrscann.camera.getBitmap
+import com.skyme32.qrscann.strategy.BarcodeDefinition
 import com.skyme32.qrscann.strategy.BarcodeResolver
 import com.skyme32.qrscann.ui.intent.shareIntent
 
@@ -47,88 +50,109 @@ fun ScanCard(
         val barcodeDefinition = barcodeResolver.getBy(barcode?.valueType)
 
         Column {
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .height(72.dp)
-                    .padding(start = 16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                // Miniatura
-                Box(
-                    modifier = Modifier
-                        .background(color = Color.LightGray, shape = CircleShape)
-                        .size(40.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = painterResource(barcodeDefinition!!.getImages()),
-                        contentDescription = null
-                    )
-                }
 
-                Spacer(modifier = Modifier.width(32.dp))
-
-                Column(Modifier.fillMaxWidth()) {
-                    // Encabezado
-                    Text(text = barcodeDefinition!!.getText(context), style = MaterialTheme.typography.h6)
-                    CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                        RowText(
-                            text = barcode?.displayValue.toString(),
-                            color = Color.Gray,
-                            style = MaterialTheme.typography.subtitle1,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
-                }
-
-            }
+            headerCarView(barcodeDefinition, context, barcode)
 
             Spacer(modifier = Modifier.height(4.dp))
+
             HelpText(barcode)
+
             Spacer(modifier = Modifier.height(8.dp))
 
+            actionBottom(barcodeDefinition, context, barcode)
+        }
+    }
+}
+
+@Composable
+private fun headerCarView(
+    barcodeDefinition: BarcodeDefinition?,
+    context: Context,
+    barcode: Barcode?
+) {
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .height(72.dp)
+            .padding(start = 16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        // Miniatura
+        Box(
+            modifier = Modifier
+                .background(color = Color.LightGray, shape = CircleShape)
+                .size(40.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Image(
+                painter = painterResource(barcodeDefinition!!.getImages()),
+                contentDescription = null
+            )
+        }
+
+        Spacer(modifier = Modifier.width(16.dp))
+
+        Column(Modifier.fillMaxWidth()) {
+            // Encabezado
+            Text(text = barcodeDefinition!!.getText(context), style = MaterialTheme.typography.h6)
             CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+                RowText(
+                    text = barcode?.displayValue.toString(),
+                    color = Color.Gray,
+                    style = MaterialTheme.typography.subtitle1,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+        }
 
-                Box(
-                    Modifier
-                        .padding(horizontal = 8.dp)
-                        .fillMaxWidth()
-                ) {
+    }
+}
 
-                    // Botones
-                    Row(modifier = Modifier.align(Alignment.CenterStart)) {
-                        if (barcodeDefinition!!.isIntent()) {
-                            TextButton(onClick = {
-                                try {
-                                    context.startActivity(
-                                        barcodeDefinition.getIntent(
-                                            context,
-                                            barcode!!
-                                        )
-                                    )
-                                } catch (e: Exception) {
-                                    Log.i("Error", e.printStackTrace().toString())
-                                }
+@Composable
+private fun actionBottom(
+    barcodeDefinition: BarcodeDefinition?,
+    context: Context,
+    barcode: Barcode?
+) {
+    CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
 
-                            }) {
-                                Text(text = barcodeDefinition.getTextButton(context))
-                            }
+        Box(
+            Modifier
+                .padding(horizontal = 8.dp)
+                .fillMaxWidth()
+        ) {
+
+            // Botones
+            Row(modifier = Modifier.align(Alignment.CenterStart)) {
+                if (barcodeDefinition!!.isIntent()) {
+                    TextButton(onClick = {
+                        try {
+                            context.startActivity(
+                                barcodeDefinition.getIntent(
+                                    context,
+                                    barcode!!
+                                )
+                            )
+                        } catch (e: Exception) {
+                            Log.i("Error", e.printStackTrace().toString())
                         }
-                    }
 
-                    // Iconos
-                    Row(modifier = Modifier.align(Alignment.CenterEnd)) {
-
-                        IconButton(onClick = {
-                            barcode?.displayValue?.let {
-                                shareIntent(context = context, extraText = it)
-                            }
-                        }) {
-                            Icon(Icons.Default.Share, contentDescription = null)
-                        }
+                    }) {
+                        Text(text = barcodeDefinition.getTextButton(context))
                     }
+                }
+            }
+
+            // Iconos
+            Row(modifier = Modifier.align(Alignment.CenterEnd)) {
+
+                IconButton(onClick = {
+                    barcode?.displayValue?.let {
+                        shareIntent(context = context, extraText = it)
+                    }
+                }) {
+                    Icon(Icons.Default.Share, contentDescription = null)
                 }
             }
         }
@@ -136,7 +160,17 @@ fun ScanCard(
 }
 
 @Composable
-fun HelpText(barcode: Barcode?) {
+private fun HelpText(barcode: Barcode?) {
+
+    Row(modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
+    ) {
+        Image(
+            bitmap = getBitmap(barcode?.rawValue.toString()).asImageBitmap(),
+            contentDescription = "some useful description",
+        )
+    }
+/*
     Row(
         Modifier.padding(start = 16.dp, end = 16.dp, top = 0.dp)
     ) {
@@ -151,4 +185,5 @@ fun HelpText(barcode: Barcode?) {
             }
         }
     }
+ */
 }
