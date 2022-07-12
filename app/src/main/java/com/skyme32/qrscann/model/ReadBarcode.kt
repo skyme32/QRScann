@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 import com.google.mlkit.vision.barcode.common.Barcode
 
 @Entity(tableName = "barcode")
-class ReadBarcode(barcode: Barcode, image: Int) {
+class ReadBarcode(barcode: Barcode, imageId: Int) {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull

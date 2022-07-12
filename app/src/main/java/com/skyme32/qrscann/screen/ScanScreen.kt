@@ -6,6 +6,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -44,11 +45,13 @@ private fun requestForegroundPermission(context: Context) {
     }
 }
 
+@ExperimentalMaterialApi
 @Composable
 fun ScanScreen(navController: NavHostController) {
     navTopAppBarScan(navController)
 }
 
+@ExperimentalMaterialApi
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun navTopAppBarScan(navController: NavHostController) {

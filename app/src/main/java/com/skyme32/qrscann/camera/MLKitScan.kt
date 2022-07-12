@@ -2,7 +2,6 @@ package com.skyme32.qrscann.camera
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy

@@ -1,5 +1,6 @@
 package com.skyme32.qrscann.navigation
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -9,6 +10,7 @@ import com.skyme32.qrscann.screen.MainScreen
 import com.skyme32.qrscann.screen.ScanScreen
 import com.skyme32.qrscann.screen.SplashScreen
 
+@ExperimentalMaterialApi
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
