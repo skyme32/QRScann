@@ -20,7 +20,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.mlkit.vision.barcode.common.Barcode
-import com.skyme32.qrscann.R
 import com.skyme32.qrscann.strategy.BarcodeResolver
 import com.skyme32.qrscann.ui.intent.shareIntent
 

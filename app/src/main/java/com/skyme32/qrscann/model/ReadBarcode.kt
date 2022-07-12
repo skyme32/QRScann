@@ -9,8 +9,6 @@ import com.google.mlkit.vision.barcode.common.Barcode
 @Entity(tableName = "barcode")
 class ReadBarcode(barcode: Barcode, image: Int) {
 
-    //lateinit var bar: Barcode;
-
     @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "barcodeId")
