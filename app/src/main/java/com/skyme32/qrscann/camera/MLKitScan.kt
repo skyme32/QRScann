@@ -2,6 +2,7 @@ package com.skyme32.qrscann.camera
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
@@ -36,7 +37,7 @@ import kotlinx.coroutines.launch
 import java.util.concurrent.Executors
 
 
-@OptIn(ExperimentalMaterialApi::class)
+@ExperimentalMaterialApi
 @Composable
 fun MLKitScan(barcodeView: BarcodeView = viewModel()) {
     val context = LocalContext.current
@@ -70,7 +71,7 @@ fun MLKitScan(barcodeView: BarcodeView = viewModel()) {
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@ExperimentalMaterialApi
 @SuppressLint("RestrictedApi")
 @Composable
 fun CameraRecognitionView(
@@ -137,7 +138,7 @@ class BarcodeView : ViewModel() {
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@ExperimentalMaterialApi
 class ObjectDetectorImageAnalyzer(
     private val scanner: BarcodeScanner,
     private var extractedText: MutableState<Barcode?>,
@@ -157,10 +158,14 @@ class ObjectDetectorImageAnalyzer(
                 .addOnCompleteListener { barcodes ->
 
                     if (barcodes.isSuccessful) {
-
                         for (barcode in barcodes.result) {
-                            extractedText.value = barcode
-                            scope.launch { state.show() }
+
+                            if (barcode.format == Barcode.FORMAT_QR_CODE
+                                || barcode.format == Barcode.FORMAT_DATA_MATRIX
+                                || barcode.format == Barcode.FORMAT_CODABAR) {
+                                extractedText.value = barcode
+                                scope.launch { state.show() }
+                            }
                         }
                     }
                     imageProxy.close()
