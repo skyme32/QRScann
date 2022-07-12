@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">QRScann</string>
+    <string name="title_detail">QR Informació</string>
+    <string name="title_scann">Escanejar QR</string>
+    <string name="arrow_back">Tornar enrrere</string>
+    <string name="text_copied">"Text copiat "</string>
+    <string name="is_url">És una ADREÇA WEB</string>
+    <string name="is_geo">És una LOCALITZACIÓ</string>
+    <string name="is_email">És un CORREU</string>
+    <string name="is_sms">És un SMS</string>
+    <string name="is_calendar">"És un CALENDARI "</string>
+    <string name="is_contact">És un CONTACTE</string>
+    <string name="is_phone">"És un TELÈFON "</string>
+    <string name="is_wifi">"És una WIFI "</string>
+    <string name="is_text">És un TEXT</string>
+    <string name="is_unassigned">"És SENSE ASSIGNAR "</string>
+    <string name="button_url">VISUALITZAR</string>
+    <string name="button_geo">OBRIR MAPA</string>
+    <string name="button_email">ENVIAR CORREU</string>
+    <string name="button_sms">ENVIAR SMS</string>
+    <string name="button_calendar">AFEGIR EVENT</string>
+    <string name="button_contact">" AFEGIR CONTACTE"</string>
+    <string name="button_phone">TRUCAR</string>
+    <string name="button_wifi">AFEGIR WIFI</string>
+    <string name="button_text">COPIAR TEXT</string>
+</resources>

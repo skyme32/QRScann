@@ -7,16 +7,16 @@
     <string name="text_copied">Texto copiado</string>
 
     <!-- -->
-    <string name="is_url">Es una URL</string>
+    <string name="is_url">Es una DIRECCIÓN WEB</string>
     <string name="is_geo">Es una LOCALIZACIÓN</string>
-    <string name="is_email">Es una CORREO</string>
+    <string name="is_email">Es un CORREO</string>
     <string name="is_sms">Es un SMS</string>
     <string name="is_calendar">Es un CALENDARIO</string>
     <string name="is_contact">Es un CONTACTO</string>
-    <string name="is_phone">Es un TELEFONO</string>
+    <string name="is_phone">Es un TELÉFONO</string>
     <string name="is_wifi">"Es un WIFI</string>
     <string name="is_text">Es un TEXTO</string>
-    <string name="is_unassigned">This is a UNASSIGNED</string>
+    <string name="is_unassigned">Es SIN ASIGNAR</string>
 
     <!-- -->
     <string name="button_url">VISUALIZAR</string>
@@ -27,5 +27,5 @@
     <string name="button_contact">AÑADIR CONTACTO</string>
     <string name="button_phone">LLAMAR</string>
     <string name="button_wifi">AÑADIR WIFI</string>
-    <string name="button_text">COPIAR TEXT</string>
+    <string name="button_text">COPIAR TEXTO</string>
 </resources>
