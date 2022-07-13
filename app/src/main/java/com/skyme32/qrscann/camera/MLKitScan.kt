@@ -2,22 +2,23 @@ package com.skyme32.qrscann.camera
 
 import android.annotation.SuppressLint
 import android.content.Context
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.ImageProxy
-import androidx.camera.core.Preview
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
@@ -30,6 +31,7 @@ import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
+import com.skyme32.qrscann.R
 import com.skyme32.qrscann.ui.component.ScanCard
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -43,7 +45,7 @@ fun MLKitScan(barcodeView: BarcodeView = viewModel()) {
     val lifecycleOwner = LocalLifecycleOwner.current
     val liveBarcode: State<Barcode?> = barcodeView.barcode.observeAsState(null)
 
-    var skipHalfExpanded by remember { mutableStateOf(false) }
+    val skipHalfExpanded by remember { mutableStateOf(false) }
     val state = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = skipHalfExpanded
@@ -79,13 +81,17 @@ fun CameraRecognitionView(
     extractedText: MutableState<Barcode?>,
     state: ModalBottomSheetState,
     scope: CoroutineScope,
-    ) {
+) {
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
+    val cameraProvider = cameraProviderFuture.get()
+    var camera: Camera? = null
     var preview by remember { mutableStateOf<Preview?>(null) }
     val executor = ContextCompat.getMainExecutor(context)
-    val cameraProvider = cameraProviderFuture.get()
     val scanner = remember { BarcodeScanning.getClient() }
     val cameraExecutor = remember { Executors.newSingleThreadExecutor() }
+
+    var flashEnabled by remember { mutableStateOf(false) }
+    var flashRes by remember { mutableStateOf(R.drawable.ic_baseline_flashlight_on) }
 
     cameraProviderFuture.cancel(true)
 
@@ -111,7 +117,7 @@ fun CameraRecognitionView(
                         .requireLensFacing(CameraSelector.LENS_FACING_BACK)
                         .build()
                     cameraProvider.unbindAll()
-                    cameraProvider.bindToLifecycle(
+                    camera = cameraProvider.bindToLifecycle(
                         lifecycleOwner,
                         cameraSelector,
                         imageAnalysis,
@@ -125,6 +131,39 @@ fun CameraRecognitionView(
                 previewView
             }
         )
+
+        Row(
+            horizontalArrangement = Arrangement.End,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+                .align(Alignment.TopStart)
+        ) {
+
+            IconButton(onClick = {
+                camera?.let {
+
+                    if (it.cameraInfo.hasFlashUnit()) {
+                        flashEnabled = !flashEnabled
+                        flashRes =
+                            if (flashEnabled) R.drawable.ic_baseline_flashlight_off else R.drawable.ic_baseline_flashlight_on
+                        it.cameraControl.enableTorch(flashEnabled)
+                    }
+                }
+            }) {
+                Box(
+                    modifier = Modifier
+                        .background(color = Color.LightGray, shape = CircleShape)
+                        .size(50.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Image(
+                        painter = painterResource(id = flashRes),
+                        contentDescription = null
+                    )
+                }
+            }
+        }
     }
 }
 
@@ -143,7 +182,7 @@ class ObjectDetectorImageAnalyzer(
     private var extractedText: MutableState<Barcode?>,
     private var state: ModalBottomSheetState,
     private var scope: CoroutineScope
-    ) : ImageAnalysis.Analyzer {
+) : ImageAnalysis.Analyzer {
 
     @SuppressLint("UnsafeOptInUsageError")
     override fun analyze(imageProxy: ImageProxy) {
@@ -161,7 +200,8 @@ class ObjectDetectorImageAnalyzer(
 
                             if (barcode.format == Barcode.FORMAT_QR_CODE
                                 || barcode.format == Barcode.FORMAT_DATA_MATRIX
-                                || barcode.format == Barcode.FORMAT_CODABAR) {
+                                || barcode.format == Barcode.FORMAT_CODABAR
+                            ) {
                                 extractedText.value = barcode
                                 scope.launch { state.show() }
                             }

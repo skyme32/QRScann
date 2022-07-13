@@ -76,7 +76,6 @@ private fun headerCarView(
             .padding(start = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Miniatura
         Box(
             modifier = Modifier
                 .background(color = Color.LightGray, shape = CircleShape)
