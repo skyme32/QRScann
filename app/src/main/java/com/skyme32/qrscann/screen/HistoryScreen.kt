@@ -19,13 +19,13 @@ import com.skyme32.qrscann.ui.component.RowMainScreen
 
 
 @Composable
-fun HistoryScreen(navController: NavHostController) {
-    NavTopAppBarMain(navController)
+fun HistoryScreen() {
+    NavTopAppBarMain()
 }
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun NavTopAppBarMain(navController: NavHostController) {
+fun NavTopAppBarMain() {
     Scaffold(
         topBar = {
             TopAppBar(

@@ -59,6 +59,8 @@ fun ScanCard(
             Spacer(modifier = Modifier.height(8.dp))
 
             actionBottom(barcodeDefinition, context, barcode)
+
+            Spacer(modifier = Modifier.height(56.dp))
         }
     }
 }

@@ -47,14 +47,14 @@ private fun requestForegroundPermission(context: Context) {
 
 @ExperimentalMaterialApi
 @Composable
-fun ScanScreen(navController: NavHostController) {
-    navTopAppBarScan(navController)
+fun ScanScreen() {
+    navTopAppBarScan()
 }
 
 @ExperimentalMaterialApi
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun navTopAppBarScan(navController: NavHostController) {
+fun navTopAppBarScan() {
     Scaffold(
         topBar = {
             TopAppBar(

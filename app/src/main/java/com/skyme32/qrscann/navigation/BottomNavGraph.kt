@@ -16,10 +16,10 @@ fun BottomNavGraph(navController: NavHostController) {
         navController = navController,
         startDestination = BottomBarScreen.Camera.route) {
         composable(route = BottomBarScreen.History.route) {
-            HistoryScreen(navController)
+            HistoryScreen()
         }
         composable(route = BottomBarScreen.Camera.route) {
-            ScanScreen(navController)
+            ScanScreen()
         }
     }
 }
