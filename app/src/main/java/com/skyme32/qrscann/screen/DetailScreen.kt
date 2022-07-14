@@ -1,6 +1,8 @@
 package com.skyme32.qrscann.screen
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
@@ -21,6 +23,7 @@ fun DetailScreen(navController: NavHostController) {
     navTopAppBarDetail(navController)
 }
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun navTopAppBarDetail(navController: NavHostController) {
     Scaffold(
@@ -44,6 +47,7 @@ fun navTopAppBarDetail(navController: NavHostController) {
             )
         }
     ) {
-
+        Column(//modifier = Modifier.fillMaxSize()
+        ) {}
     }
 }

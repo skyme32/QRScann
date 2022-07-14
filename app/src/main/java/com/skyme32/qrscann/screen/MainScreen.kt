@@ -1,69 +1,70 @@
 package com.skyme32.qrscann.screen
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CropFree
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.sp
+import androidx.compose.runtime.getValue
+import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
-import com.skyme32.qrscann.R
-import com.skyme32.qrscann.navigation.AppScreens
-import com.skyme32.qrscann.ui.component.RowMainScreen
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.skyme32.qrscann.navigation.BottomBarScreen
+import com.skyme32.qrscann.navigation.BottomNavGraph
 
-
-@Composable
-fun MainScreen(navController: NavHostController) {
-    navTopAppBarMain(navController)
-}
-
+@ExperimentalMaterialApi
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun navTopAppBarMain(navController: NavHostController) {
+fun MainScreen() {
+    val navController = rememberNavController()
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Row {
-                    Text(
-                        text = stringResource(id = R.string.app_name),
-                        fontSize = 20.sp,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                } }
-            )
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = { navController.navigate(AppScreens.ScanScreen.route) },
-                backgroundColor = MaterialTheme.colors.secondary
-            ) {
-                Icon(Icons.Filled.CropFree, "")
-            }
-        }
+        bottomBar = { BottomBar(navController = navController) }
     ) {
-        ListMainScreen()
+        BottomNavGraph(navController = navController)
     }
 }
 
 @Composable
-fun ListMainScreen() {
-    Column(//modifier = Modifier.fillMaxSize()
-    ) {
-        RowMainScreen(
-            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
-        )
-        RowMainScreen(
-            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
-        )
-        RowMainScreen(
-            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
-        )
+fun BottomBar(navController: NavHostController) {
+    val screens = listOf(
+        BottomBarScreen.Camera,
+        BottomBarScreen.History
+    )
+
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
+
+    BottomNavigation {
+        screens.forEach { screen ->
+            AddItem(
+                screen = screen,
+                currentDestination = currentDestination,
+                navController = navController
+            )
+        }
     }
+}
+
+@Composable
+fun RowScope.AddItem(
+    screen: BottomBarScreen,
+    currentDestination: NavDestination?,
+    navController: NavHostController
+) {
+
+    BottomNavigationItem(
+        label = {
+            Text(text = screen.title)
+        },
+        icon = {
+            Icon(imageVector = screen.icon, contentDescription = "Navigation Icon")
+        },
+        selected = currentDestination?.hierarchy?.any {
+            it.route == screen.route
+        } == true,
+        onClick = {
+            navController.navigate(screen.route)
+        }
+    )
 }
