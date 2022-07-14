@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">QRScann</string>
+    <string name="title_scann">QR scannen</string>
+    <string name="title_detail">QR-Informationen</string>
+    <string name="arrow_back">Zurück</string>
+    <string name="text_copied">Text kopiert</string>
+
+    <!-- -->
+    <string name="is_url">Es ist eine WEB-ADRESSE</string>
+    <string name="is_geo">Es ist ein STANDORT</string>
+    <string name="is_email">Es ist eine E-MAIL</string>
+    <string name="is_sms">Es ist eine SMS</string>
+    <string name="is_calendar">Es ist ein KALENDER</string>
+    <string name="is_contact">Ist ein KONTAKT</string>
+    <string name="is_phone">Es ist ein TELEFON</string>
+    <string name="is_wifi">"Es ist ein WLAN</string>
+    <string name="is_text">Es ist ein TEXT</string>
+    <string name="is_unassigned">Ist NICHT ZUGEWIESEN</string>
+
+    <!-- -->
+    <string name="button_url">ANSEHEN</string>
+    <string name="button_geo">KARTE ÖFFNEN</string>
+    <string name="button_email">EMAIL SENDEN</string>
+    <string name="button_sms">SMS SENDEN</string>
+    <string name="button_calendar">EREIGNIS HINZUFÜGEN</string>
+    <string name="button_contact">KONTAKT HINZUFÜGEN</string>
+    <string name="button_phone">ANRUFEN</string>
+    <string name="button_wifi">WLAN HINZUFÜGEN</string>
+    <string name="button_text">TEXT KOPIEREN</string>
+</resources>
