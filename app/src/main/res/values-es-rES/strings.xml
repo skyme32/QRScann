@@ -28,4 +28,5 @@
     <string name="button_phone">LLAMAR</string>
     <string name="button_wifi">AÑADIR WIFI</string>
     <string name="button_text">COPIAR TEXTO</string>
+    <string name="history_title">Historial QR</string>
 </resources>

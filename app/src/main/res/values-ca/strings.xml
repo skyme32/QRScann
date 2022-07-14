@@ -24,4 +24,5 @@
     <string name="button_phone">TRUCAR</string>
     <string name="button_wifi">AFEGIR WIFI</string>
     <string name="button_text">COPIAR TEXT</string>
+    <string name="history_title">Historial QR</string>
 </resources>
