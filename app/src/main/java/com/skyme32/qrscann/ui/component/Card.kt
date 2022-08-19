@@ -7,6 +7,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material.icons.filled.CopyAll
+import androidx.compose.material.icons.filled.FileCopy
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -15,14 +18,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.skyme32.qrscann.camera.getBitmap
 import com.skyme32.qrscann.strategy.BarcodeDefinition
 import com.skyme32.qrscann.strategy.BarcodeResolver
+import com.skyme32.qrscann.ui.intent.copyIntent
 import com.skyme32.qrscann.ui.intent.shareIntent
 
 
@@ -144,6 +150,14 @@ private fun actionBottom(
 
                 IconButton(onClick = {
                     barcode?.displayValue?.let {
+                        copyIntent(context = context, text = barcode.rawValue!!)
+                    }
+                }) {
+                    Icon(Icons.Default.ContentCopy, contentDescription = null)
+                }
+
+                IconButton(onClick = {
+                    barcode?.displayValue?.let {
                         shareIntent(context = context, extraText = it)
                     }
                 }) {
@@ -182,4 +196,10 @@ private fun HelpText(barcode: Barcode?) {
         }
     }
  */
+}
+
+@Preview
+@Composable
+fun defaultScanCard() {
+    ScanCard(barcode = null, context = LocalContext.current)
 }
