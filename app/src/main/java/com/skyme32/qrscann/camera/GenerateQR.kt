@@ -11,8 +11,8 @@ import com.google.zxing.qrcode.QRCodeWriter
 fun getBitmap(qrCodeContent: String, primary: Color, secondary: Color): Bitmap {
 
     val hints = hashMapOf<EncodeHintType, Int>().also { it[EncodeHintType.MARGIN] = 1 }
-    val bits = QRCodeWriter().encode(qrCodeContent, BarcodeFormat.QR_CODE, 512, 512, hints)
-    val size = 512 //pixels
+    val bits = QRCodeWriter().encode(qrCodeContent, BarcodeFormat.QR_CODE, 400, 400, hints)
+    val size = 400 //pixels
     return Bitmap.createBitmap(size, size, Bitmap.Config.RGB_565).also {
         for (x in 0 until size) {
             for (y in 0 until size) {

@@ -178,6 +178,7 @@ private fun HelpText(barcode: Barcode?) {
         horizontalArrangement = Arrangement.Center,
     ) {
         Image(
+            modifier = Modifier.background(color = Color.LightGray).fillMaxWidth().padding(16.dp),
             bitmap = getBitmap(barcode?.rawValue.toString(), MaterialTheme.colors.primary, MaterialTheme.colors.background).asImageBitmap(),
             contentDescription = "some useful description",
         )
