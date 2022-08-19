@@ -3,7 +3,7 @@
     <string name="app_name">QRScann</string>
     <string name="title_detail">QR Informació</string>
     <string name="title_scann">Escanejar QR</string>
-    <string name="arrow_back">Tornar enrrere</string>
+    <string name="arrow_back">Tornar enrere</string>
     <string name="text_copied">"Text copiat "</string>
     <string name="is_url">És una ADREÇA WEB</string>
     <string name="is_geo">És una LOCALITZACIÓ</string>

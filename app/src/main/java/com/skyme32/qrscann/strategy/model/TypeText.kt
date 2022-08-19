@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.skyme32.qrscann.R
 import com.skyme32.qrscann.strategy.BarcodeDefinition
+import com.skyme32.qrscann.ui.intent.copyIntent
 
 
 object TypeText: BarcodeDefinition {
@@ -18,11 +19,7 @@ object TypeText: BarcodeDefinition {
 
     override fun getIntent(context: Context, barcode: Barcode): Intent {
 
-        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val clip: ClipData = ClipData.newPlainText("simple text", barcode.displayValue)
-        clipboard.setPrimaryClip(clip)
-
-        Toast.makeText(context, context.getString(R.string.text_copied), Toast.LENGTH_SHORT).show()
+        copyIntent(context = context, text = barcode.displayValue!!)
 
         return Intent(context, null)
     }
