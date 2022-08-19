@@ -54,7 +54,8 @@ fun MLKitScan(barcodeView: BarcodeView = viewModel()) {
 
     ModalBottomSheetLayout(
         sheetState = state,
-        sheetShape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
+        sheetShape = RoundedCornerShape(16.dp, 16.dp, 0.dp, 0.dp),
+        scrimColor = MaterialTheme.colors.onBackground.copy(alpha = 0.60f),
         sheetContent = {
             ScanCard(
                 barcode = liveBarcode.value,
@@ -69,6 +70,10 @@ fun MLKitScan(barcodeView: BarcodeView = viewModel()) {
             state = state,
             scope = scope
         )
+
+        SideEffect {
+            scope.launch { state.hide() }
+        }
     }
 }
 
