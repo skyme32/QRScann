@@ -92,7 +92,7 @@ fun CameraRecognitionView(
 
     var flashEnabled by remember { mutableStateOf(false) }
     var flashRes by remember { mutableStateOf(R.drawable.ic_baseline_flashlight_on) }
-
+    
     cameraProviderFuture.cancel(true)
 
     Box {
@@ -110,7 +110,12 @@ fun CameraRecognitionView(
                         .apply {
                             setAnalyzer(
                                 cameraExecutor,
-                                ObjectDetectorImageAnalyzer(scanner, extractedText, state, scope)
+                                ObjectDetectorImageAnalyzer(
+                                    scanner,
+                                    extractedText,
+                                    state,
+                                    scope
+                                )
                             )
                         }
                     val cameraSelector = CameraSelector.Builder()
@@ -191,13 +196,11 @@ class ObjectDetectorImageAnalyzer(
         if (mediaImage != null) {
             val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
 
-            scanner
-                .process(image)
-                .addOnCompleteListener { barcodes ->
+            scanner.process(image).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
 
-                    if (barcodes.isSuccessful) {
-                        for (barcode in barcodes.result) {
-
+                    task.result?.let { barcodes ->
+                        for (barcode in barcodes) {
                             if (barcode.format == Barcode.FORMAT_QR_CODE
                                 || barcode.format == Barcode.FORMAT_DATA_MATRIX
                                 || barcode.format == Barcode.FORMAT_CODABAR
@@ -207,8 +210,9 @@ class ObjectDetectorImageAnalyzer(
                             }
                         }
                     }
-                    imageProxy.close()
                 }
+                imageProxy.close()
+            }
         }
     }
 }
